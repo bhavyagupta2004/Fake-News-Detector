@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake </title>
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+    <py-env>
+        - bardapi
+        - datetime
+    </py-env>
+</head>
+<body>
+    <py-script>
+        from bardapi import BardCookies
+import datetime
+cookie_dict ={
+    "__Secure-1PSID" :"cQjkCvbyj7S8XRVp11A-ywbdCFDBqmvsXzATWv52NjyWz_UT70CSvT9xD8Z1raaQ-c-HfQ.",
+    "__Secure-1PSIDTS":"sidts-CjEB3e41hQSLaG27796sEVIR-DJH2b14tpmSva2r_d6zZomLLE-OElFNRM2Wsj6zixiIEAA",
+    "__Secure-1PSIDCC" :"ACA-OxOsu_ffvYgNxIQn6F91I8pNAwVeIcGcjYG4DpbE01agppiF6CsPCYO9qz8DjCMlxiQrf5mf"
+}
+bard = BardCookies(cookie_dict=cookie_dict)
+
+def split_and_save_paragraphs(data, filename):
+    paragraphs = data.split('\n\n')
+    with open(filename, 'w') as file:
+        file.write(data)
+    data = paragraphs[:2]
+    separator = ', '
+    joined_string = separator.join(data)
+    return joined_string
+
+
+while True:
+    Question = input("Enter The Query : ")
+    RealQuestion = str(Question)
+    results = bard.get_answer(RealQuestion)['content']
+    current_datetime = datetime.datetime.now()
+    print(results)
+    </py-script>
+</body>
+</html>
